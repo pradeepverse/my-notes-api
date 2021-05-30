@@ -1,105 +1,24 @@
 const express =  require('express');
+const { create, fetch, update, delete: dbDelete } = require('../db');
 const router = express.Router();
 
-router.get('/', (req, res, next) => {
-    res.send([
-        {
-            id: 1,
-            title: 'k8s course',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'blue'
-        },
-        {
-            id: 2,
-            title: 'blog on mean',
-            content: 'Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..s.',
-            color: 'green'
-        },
-        {
-            id: 3,
-            title: 'time well spent',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'yellow'
-        },
-        {
-            id: 4,
-            title: 'Data structures and algo',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'pink'
-        },
-        {
-            id: 3,
-            title: 'time well spent',
-            content: 'Hey how are you. This is a great Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..s.course you kno...',
-            color: 'yellow'
-        },
-        {
-            id: 4,
-            title: 'Data structures and algo',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'pink'
-        },
-        {
-            id: 3,
-            title: 'time well spent',
-            content: 'Hey how are you. ThisHey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..Hey how are you. This is a great course you kno..s. is a great course you kno...',
-            color: 'yellow'
-        },
-        {
-            id: 4,
-            title: 'Data structures and algo',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'pink'
-        },
-        {
-            id: 3,
-            title: 'time well spent',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'yellow'
-        },
-        {
-            id: 4,
-            title: 'Data structures and algo',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'pink'
-        },
-        {
-            id: 3,
-            title: 'time well spent',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'yellow'
-        },
-        {
-            id: 4,
-            title: 'Data structures and algo',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'pink'
-        },
-        {
-            id: 3,
-            title: 'time well spent',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'yellow'
-        },
-        {
-            id: 4,
-            title: 'Data structures and algo',
-            content: 'Hey how are you. This is a great course you kno...',
-            color: 'pink'
-        }
-    ]);
+router.get('/', async (req, res, next) => {
+    res.send(await fetch());
 });
 
-router.put('/:id', (req, res, next) => {
-    res.send(req.params.id);
+router.post('/', async (req, res, next) => {
+    const result = await create(req.body);
+    res.send(result);
 });
 
-router.post('/:id', (req, res, next) => {
-    res.send(req.params.id);
+router.put('/:id/edit', async(req, res, next) => {
+    const result = await update(req.params.id, req.body);
+    res.send(result);
 });
 
-router.delete('/:id', (req, res, next) => {
-    res.send(req.params.id);
+router.delete('/:id/delete', async(req, res, next) => {
+    const result = await dbDelete(req.params.id);
+    res.send(result);
 });
 
 module.exports = router;
