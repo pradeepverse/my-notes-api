@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/notes', {useNewUrlParser: true, useUnifiedTopology: true});
+
+try {
+    mongoose.connect('mongodb://localhost:27017/notes', {useNewUrlParser: true, useUnifiedTopology: true});
+} catch (error) {
+    console.log('Error while connecting to mongoose', error);
+}
 
 const Note = mongoose.model('Note', {
     title: String,
