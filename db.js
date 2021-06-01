@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 try {
-    mongoose.connect('mongodb://localhost:27017/notes', {useNewUrlParser: true, useUnifiedTopology: true});
+    let MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
+    mongoose.connect(MONGO_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true});
 } catch (error) {
     console.log('Error while connecting to mongoose', error);
 }

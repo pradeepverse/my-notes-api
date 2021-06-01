@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notes-mongo
+  template:
+    metadata:
+      labels:
+        app: notes-mongo
+    spec:
+      containers:
+      - name: notes-mongo
+        image: mongo
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 27017
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: notes-mongo-secret
+                key: mongo-root-username
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: notes-mongo-secret
+                key: mongo-root-password
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: notes-mongo-service
+spec:
+  selector:
+    app: notes-mongo
+  ports:
+  - port: 27017
+    targetPort: 27017
