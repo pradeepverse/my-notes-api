@@ -2,9 +2,15 @@ const mongoose = require('mongoose');
 
 try {
     let MONGO_CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
+    let MONGO_ROOT_USERNAME = process.env.MONGO_ROOT_USERNAME;
+    let MONGO_ROOT_PASSWORD = process.env.MONGO_ROOT_PASSWORD;
     console.log('MONGO_CONNECTION_STRING...');
     console.log(MONGO_CONNECTION_STRING);
-    mongoose.connect(`mongodb://username:password@${MONGO_CONNECTION_STRING}/notesdb?authSource=admin`, {useNewUrlParser: true, useUnifiedTopology: true});
+    console.log('MONGO_ROOT_USERNAME...');
+    console.log(MONGO_ROOT_USERNAME);
+    console.log('MONGO_ROOT_PASSWORD...');
+    console.log(MONGO_ROOT_PASSWORD);
+    mongoose.connect(`mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@${MONGO_CONNECTION_STRING}/notesdb?authSource=admin`, {useNewUrlParser: true, useUnifiedTopology: true});
 } catch (error) {
     console.log('Error while connecting to mongoose', error);
 }

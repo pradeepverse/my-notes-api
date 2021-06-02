@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: notes-api
-        image: pradeeprajr93/notes-api:v7
+        image: pradeeprajr93/notes-api:v8
         resources:
           limits:
             memory: "512Mi"
@@ -27,6 +27,16 @@ spec:
               configMapKeyRef:
                 name: mongo-api-config
                 key: mongo-db-endpoint
+          - name: MONGO_ROOT_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: notes-mongo-secret
+                key: mongo-root-username
+          - name: MONGO_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: notes-mongo-secret
+                key: mongo-root-password
 ---
 apiVersion: v1
 kind: Service
