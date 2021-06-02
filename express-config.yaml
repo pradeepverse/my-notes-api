@@ -3,4 +3,7 @@ kind: ConfigMap
 metadata:
   name: notes-api-config
 data:
-  API_CONNECTION_STRING: notes-api-service
+  env.json: |-
+    {
+      "API_CONNECTION_STRING": 'http://127.0.0.1:51813'
+    }

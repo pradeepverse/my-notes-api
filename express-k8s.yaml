@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: notes-api
-        image: pradeeprajr93/notes-api:v2
+        image: pradeeprajr93/notes-api:v7
         resources:
           limits:
             memory: "512Mi"
@@ -26,14 +26,14 @@ spec:
             valueFrom:
               configMapKeyRef:
                 name: mongo-api-config
-                key: MONGO_CONNECTION_STRING
+                key: mongo-db-endpoint
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: notes-api-service
 spec:
+  type: LoadBalancer
   selector:
     app: notes-api
   ports:

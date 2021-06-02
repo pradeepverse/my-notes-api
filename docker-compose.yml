@@ -2,7 +2,7 @@ version: "2.4"
 services:
     web:
         build: . 
-        image: pradeeprajr93/notes-api:v2
+        image: pradeeprajr93/notes-api:v3
         ports:
         - "3000:3000"
         depends_on:

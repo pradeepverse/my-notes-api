@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: notes-mongo
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: notes-mongo
@@ -32,9 +31,7 @@ spec:
               secretKeyRef:
                 name: notes-mongo-secret
                 key: mongo-root-password
-
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

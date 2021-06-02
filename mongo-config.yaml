@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: mongo-api-config
 data:
-  MONGO_CONNECTION_STRING: notes-mongo-service
+  mongo-db-endpoint: notes-mongo-service
